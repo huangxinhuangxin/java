@@ -1,0 +1,39 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from aliyun_mailService WSDL service -->
+
+  <service name="aliyun_mail" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://hx_SA3"/>
+      <parameter name="wsdlServiceElement" value="aliyun_mailService"/>
+      <parameter name="schemaQualified" value="http://hx_SA3"/>
+      <parameter name="wsdlServicePort" value="aliyun_mail"/>
+      <parameter name="className" value="hx_SA3.Aliyun_mailSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="aliyun_mail"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="sendEmailBatch" qname="operNS:sendEmailBatch" xmlns:operNS="http://hx_SA3" returnQName="retNS:sendEmailBatchReturn" xmlns:retNS="http://hx_SA3" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:_url_1" xmlns:pns="http://hx_SA3" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:_url_2" xmlns:pns="http://hx_SA3" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:_url_3" xmlns:pns="http://hx_SA3" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:_payload" xmlns:pns="http://hx_SA3" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="sendEmail" qname="operNS:sendEmail" xmlns:operNS="http://hx_SA3" returnQName="retNS:sendEmailReturn" xmlns:retNS="http://hx_SA3" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:_url" xmlns:pns="http://hx_SA3" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:_payload" xmlns:pns="http://hx_SA3" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="validateEmailAddress" qname="operNS:validateEmailAddress" xmlns:operNS="http://hx_SA3" returnQName="retNS:validateEmailAddressReturn" xmlns:retNS="http://hx_SA3" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:url" xmlns:pns="http://hx_SA3" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="sendEmail validateEmailAddress sendEmailBatch"/>
+
+  </service>
+</deployment>
